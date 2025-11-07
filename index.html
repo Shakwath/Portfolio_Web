@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Md Shakwath | Portfolio</title>
+
+    <!-- ✅ Proper favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://i.ibb.co/qMmvjQwq/undefined-4.jpg"
+    />
+
+    <!-- ✅ Meta tags for SEO -->
+    <meta
+      name="description"
+      content="Md Shakwath — Web Developer Portfolio showcasing React, JavaScript, Tailwind, and modern frontend projects."
+    />
+    <meta name="author" content="Md Shakwath" />
+
+    <!-- ✅ Tailwind prefers dark mode control via class -->
+    <script>
+      // Ensure dark mode persists between reloads
+      if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
+  </head>
+
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-500">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
