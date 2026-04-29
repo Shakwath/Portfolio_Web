@@ -1,133 +1,146 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Download } from "lucide-react"; // icon for resume button
 
-export default function About() {
+import { FaBriefcase, FaGraduationCap } from "react-icons/fa";
+
+export default function Experience() {
   return (
     <section
       id="about"
-      className="py-20 transition-colors duration-700 
-      bg-gradient-to-br from-gray-50 via-gray-100 to-white 
-      dark:from-[#0a0a0f] dark:via-[#111122] dark:to-[#1a1a2e] 
-      text-gray-900 dark:text-white overflow-hidden"
+      className="py-20 text-white bg-[#0a0a0f] relative overflow-hidden border border-white/10"
     >
-      <div className="max-w-5xl mx-auto px-4 text-center">
-        {/* Section Heading */}
+      {/* Glow Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-[300px] h-[300px] bg-cyan-500/10 blur-[120px] rounded-full top-10 left-10" />
+        <div className="absolute w-[300px] h-[300px] bg-purple-500/10 blur-[120px] rounded-full bottom-10 right-10" />
+      </div>
+
+      <div className="max-w-6xl mx-auto px-4">
+
+        {/* Title */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-6 
-          bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 
-          dark:from-blue-400 dark:via-purple-500 dark:to-pink-400 
-          bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: -50 }}
+          className="text-4xl md:text-5xl font-bold text-center mb-14"
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
         >
-          About Me
+          Experience & Education
         </motion.h2>
 
-        {/* Description */}
-        <motion.p
-          className="text-lg max-w-3xl mx-auto leading-relaxed 
-          text-gray-600 dark:text-gray-300"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 1 }}
-        >
-          I’m a frontend developer passionate about crafting interactive,
-          accessible, and high-performance web experiences. I love transforming
-          ideas into elegant and responsive designs using React, Tailwind CSS,
-          and modern development tools.
-        </motion.p>
+        {/* STATS */}
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-14">
 
-        {/* Info Cards */}
-        <div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {/* Web Developer Card */}
+  {[
+    { label: "Experience", value: "2+ Years" },
+    { label: "Projects", value: "3+ Completed" },
+    { label: "Stack", value: "React / Node JS" },
+  ].map((item, i) => (
+    <motion.div
+      key={i}
+      className="
+      rounded-3xl p-6 text-center
+      border border-white/20
+      bg-transparent
+      hover:border-white
+      transition-all duration-500
+      "
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 1.05 }}
+      transition={{ delay: i * 0.1 }}
+    >
+      <h3 className="text-2xl font-semibold text-cyan-300">
+        {item.value}
+      </h3>
+
+      <p className="text-gray-400 text-sm mt-1">
+        {item.label}
+      </p>
+    </motion.div>
+  ))}
+
+</div>
+
+        {/* GRID */}
+        <div className="grid md:grid-cols-2 gap-10">
+
+          {/* EXPERIENCE */}
           <motion.div
-            className="p-6 rounded-2xl 
-            bg-gradient-to-b from-blue-100 to-white 
-            dark:from-[#1a1a2e] dark:to-[#111122] 
-            border border-gray-300 dark:border-gray-700 
-            shadow-md dark:shadow-blue-600/20 
-            hover:shadow-lg hover:shadow-blue-500/40 
-            transition-all duration-500"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
           >
-            <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
-              Web Developer
+            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-cyan-300">
+              <FaBriefcase /> Experience
             </h3>
-            <p className="mt-2 text-gray-700 dark:text-gray-400">
-              Skilled in React, Tailwind, and building modern UIs
-            </p>
+
+            <div className="rounded-3xl p-6
+              bg-white/10 backdrop-blur-xl
+              border border-white/10
+              hover:shadow-[0_0_25px_rgba(34,211,238,0.15)]
+              transition">
+
+              <h4 className="font-semibold text-white">
+                Web Developer
+              </h4>
+
+              <p className="text-sm text-gray-400">
+                2025 - PRESENT
+              </p>
+
+              <p className="mt-3 text-gray-300 text-sm leading-relaxed">
+                Developing modern full-stack web applications using React,
+                Node.js, MongoDB, and Express with a focus on performance,
+                scalability, and UI/UX.
+              </p>
+            </div>
           </motion.div>
 
-          {/* 5+ Projects Card */}
+          {/* EDUCATION */}
           <motion.div
-            className="p-6 rounded-2xl 
-            bg-gradient-to-b from-purple-100 to-white 
-            dark:from-[#1a1a2e] dark:to-[#111122] 
-            border border-gray-300 dark:border-gray-700 
-            shadow-md dark:shadow-purple-600/20 
-            hover:shadow-lg hover:shadow-purple-500/40 
-            transition-all duration-500"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
           >
-            <h3 className="text-xl font-semibold text-purple-600 dark:text-purple-400">
-              5+ Projects Completed
+            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2 text-purple-300">
+              <FaGraduationCap /> Education
             </h3>
-            <p className="mt-2 text-gray-700 dark:text-gray-400">
-              Delivered creative and functional web solutions
-            </p>
+
+            <div className="space-y-4">
+
+              {[
+                {
+                  title: "International Islamic University Chittagong",
+                  sub: "BSc in CSE (2023 - 2027)",
+                },
+                {
+                  title: "Chittagong Govt City College",
+                  sub: "2020 - 2021",
+                },
+                {
+                  title: "Haji Mohammad Mohsin Govt High School",
+                  sub: "2015 - 2019",
+                },
+              ].map((edu, i) => (
+                <div
+                  key={i}
+                  className="p-5 rounded-3xl
+                  bg-white/10 backdrop-blur-xl
+                  border border-white/10
+                  hover:shadow-[0_0_25px_rgba(168,85,247,0.15)]
+                  transition"
+                >
+                  <h4 className="font-medium text-white">
+                    {edu.title}
+                  </h4>
+                  <p className="text-sm text-gray-400 mt-1">
+                    {edu.sub}
+                  </p>
+                </div>
+              ))}
+
+            </div>
           </motion.div>
 
-          {/* Education Card */}
-          <motion.div
-            className="p-6 rounded-2xl 
-            bg-gradient-to-b from-pink-100 to-white 
-            dark:from-[#1a1a2e] dark:to-[#111122] 
-            border border-gray-300 dark:border-gray-700 
-            shadow-md dark:shadow-pink-600/20 
-            hover:shadow-lg hover:shadow-pink-500/40 
-            transition-all duration-500"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            <h3 className="text-xl font-semibold text-pink-600 dark:text-pink-400">
-              Education
-            </h3>
-            <p className="mt-2 text-gray-700 dark:text-gray-400">
-              B.Sc. in Computer Science
-            </p>
-          </motion.div>
         </div>
 
-        {/* Resume Button */}
-        <motion.div
-          className="mt-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-        >
-          <a
-            href="/resume.pdf"
-            download
-            className="inline-flex items-center gap-2 px-6 py-3 
-            text-white text-lg font-medium rounded-full 
-            bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-            hover:from-blue-600 hover:via-purple-600 hover:to-pink-600 
-            shadow-md hover:shadow-lg transition-all duration-500"
-          >
-            <Download className="w-5 h-5" />
-            Download Resume
-          </a>
-        </motion.div>
       </div>
     </section>
   );

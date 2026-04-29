@@ -1,145 +1,176 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+
+// React Icons (install if not yet: npm i react-icons)
+import { FaReact, FaNodeJs, FaVuejs, FaJs } from "react-icons/fa";
+import { SiFirebase, SiMongodb, SiTailwindcss } from "react-icons/si";
+
+const techIcons = {
+  React: <FaReact className="text-cyan-400" />,
+  "Node.js": <FaNodeJs className="text-green-500" />,
+  MongoDB: <SiMongodb className="text-green-400" />,
+  Firebase: <SiFirebase className="text-yellow-400" />,
+  Vue: <FaVuejs className="text-green-300" />,
+  JavaScript: <FaJs className="text-yellow-300" />,
+  Tailwind: <SiTailwindcss className="text-sky-400" />,
+};
 
 const projects = [
   {
     title: "Visa Navigation Site",
     description:
-      "A user-friendly Visa Navigator Portal that simplifies the process of checking visa requirements, applying for visas online, and tracking applications.",
+      "A user-friendly Visa Navigator Portal that simplifies visa checking, application, and tracking system.",
     tech: ["React", "Node.js", "MongoDB", "Firebase"],
     image: "https://i.ibb.co.com/HT49QZBc/Screenshot-2025-09-12-010123.png",
     link: "https://visa-navigation-client.vercel.app/",
-    delay: 0.1,
   },
   {
     title: "Gadget Haven",
     description:
-      "A responsive tech product showcase using React and Firebase authentication system, featuring product filters and cart functionality.",
-    tech: ["Vue.js", "Firebase", "Tailwind", "DaisyUI"],
+      "Tech product showcase with authentication, filters, and cart functionality.",
+    tech: ["Vue", "Firebase", "Tailwind"],
     image: "https://i.ibb.co.com/21780Mnk/Screenshot-2025-09-12-011402.png",
     link: "https://lively-sawine-2097e5.netlify.app/",
-    delay: 0.2,
   },
   {
     title: "Learn Vocabulary",
     description:
-      "An interactive web app designed to help users improve their vocabulary in a fun and effective way. Offers pronunciation, categories, and tracking.",
-    tech: ["Firebase Auth", "JavaScript", "API"],
+      "Interactive web app to improve vocabulary with pronunciation, categories, and tracking.",
+    tech: ["JavaScript", "Firebase"],
     image: "https://i.ibb.co.com/S44FgXbZ/Screenshot-2025-09-12-010929.png",
     link: "https://a9-vocabullary-learn.web.app/",
-    delay: 0.3,
   },
 ];
 
 export default function Projects() {
+  const [active, setActive] = useState(null);
+
   return (
-    <section
-      id="projects"
-      className="py-20 transition-colors duration-700
-      bg-gradient-to-br from-gray-50 via-white to-blue-50
-      dark:from-[#0a0a0f] dark:via-[#111122] dark:to-[#1a1a2e]
-      text-gray-900 dark:text-white overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Heading */}
+    <section id="projects" className="py-20 text-white bg-[#0a0a0f] relative overflow-hidden border border-white/10">
+
+      {/* Glow background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-72 h-72 bg-cyan-500/10 blur-3xl rounded-full top-10 left-10" />
+        <div className="absolute w-72 h-72 bg-purple-500/10 blur-3xl rounded-full bottom-10 right-10" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4">
+
+        {/* Title */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-center mb-12
-          bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
-          bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: -40 }}
+          className="text-4xl md:text-5xl font-bold text-center mb-14"
+          initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
         >
           My Projects
         </motion.h2>
 
-        {/* Project Cards */}
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
           {projects.map((project, index) => (
             <motion.div
               key={index}
-              className="relative rounded-xl overflow-hidden
-              bg-gradient-to-b from-white to-blue-50 
-              dark:from-[#1a1a2e] dark:to-[#0f0f1c]
-              border border-gray-300 dark:border-gray-700 
-              shadow-md dark:shadow-blue-600/30
-              hover:shadow-xl hover:shadow-blue-500/40
-              transform hover:-translate-y-2 transition-all duration-500"
-              initial={{ opacity: 0, y: 80 }}
+              className="relative rounded-3xl overflow-hidden
+              bg-white/10 backdrop-blur-xl border border-white/10
+              shadow-[0_10px_30px_rgba(0,0,0,0.4)]
+              hover:shadow-[0_0_25px_rgba(99,102,241,0.25)]
+              transition-all duration-500"
+              initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.8, delay: project.delay }}
+              whileHover={{ scale: 1.04 }}
             >
+
               {/* Image */}
-              <div className="relative overflow-hidden group">
+              <div className="overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-48 object-cover hover:scale-110 transition duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
               </div>
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-blue-600 dark:text-blue-400">
+
+                <h3 className="text-xl font-semibold text-cyan-300">
                   {project.title}
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
+
+                <p className="text-gray-200 text-sm mt-2">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 text-sm rounded-full
-                      bg-gradient-to-r from-blue-100 to-purple-100
-                      dark:from-blue-900/40 dark:to-purple-800/40
-                      text-gray-700 dark:text-gray-200"
-                    >
-                      {tech}
+                {/* TECH ICONS */}
+                <div className="flex flex-wrap gap-3 mt-4 text-2xl">
+                  {project.tech.map((t, i) => (
+                    <span key={i} title={t}>
+                      {techIcons[t] || (
+                        <span className="text-sm text-gray-300">{t}</span>
+                      )}
                     </span>
                   ))}
                 </div>
 
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-4 py-2 rounded-lg
-                  border border-blue-500 dark:border-purple-500
-                  text-blue-600 dark:text-purple-400 font-medium
-                  hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white
-                  transition-all duration-500"
-                >
-                  View Project →
-                </a>
+                {/* BUTTONS (ONLY BORDER STYLE) */}
+                <div className="flex gap-3 mt-5">
+
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    className="px-4 py-2 rounded-lg
+                    border border-green-400 text-white
+                    hover:bg-green-400/10 transition"
+                  >
+                    Live
+                  </a>
+
+                  <button
+                    onClick={() =>
+                      setActive(active === index ? null : index)
+                    }
+                    className="px-4 py-2 rounded-lg
+                    border border-cyan-400 text-white
+                    hover:border-white transition"
+                  >
+                    Details
+                  </button>
+
+                </div>
+
+                {/* DETAILS */}
+                {active === index && (
+                  <motion.div
+                    className="mt-4 p-4 rounded-2xl
+                    bg-white/10 border border-white/10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                  >
+                    <p className="text-sm text-gray-100">
+                      Modern full-stack project focused on performance, scalability, and UI/UX.
+                    </p>
+                  </motion.div>
+                )}
+
               </div>
             </motion.div>
           ))}
+
         </div>
 
-        {/* View All Button */}
-        <motion.div
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
+        {/* View All */}
+        <div className="text-center mt-12">
           <a
             href="https://github.com/Shakwath?tab=repositories"
             target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-lg
-            border border-blue-500 dark:border-purple-500
-            text-blue-600 dark:text-purple-400 font-semibold
-            hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white
-            transition-all duration-500"
+            className="inline-block px-6 py-3 rounded-2xl
+            border border-white/20 text-white
+            hover:bg-white/10 transition"
           >
             View All Projects →
           </a>
-        </motion.div>
+        </div>
+
       </div>
     </section>
   );

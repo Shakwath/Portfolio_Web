@@ -1,126 +1,155 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import { FaGithub, FaLinkedin, FaDownload } from "react-icons/fa";
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center 
-      bg-gradient-to-br from-gray-100 via-white to-blue-100 
-      dark:from-[#0a0a0f] dark:via-[#111122] dark:to-[#1a1a2e]
-      text-gray-900 dark:text-white pt-16 overflow-hidden transition-colors duration-500"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden
+      bg-[#0a0a0f] text-white pt-16"
     >
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      {/* Animated Background */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute w-72 h-72 bg-blue-500/20 rounded-full blur-3xl top-10 left-10 animate-pulse"></div>
+        <div className="absolute w-72 h-72 bg-purple-500/20 rounded-full blur-3xl bottom-10 right-10 animate-pulse"></div>
+        <div className="absolute w-72 h-72 bg-pink-500/20 rounded-full blur-3xl top-1/2 left-1/2 -translate-x-1/2"></div>
+      </div>
 
-          {/* LEFT: Text Section */}
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 py-20 grid md:grid-cols-2 gap-12 items-center">
+        
+        {/* LEFT CONTENT */}
+        <motion.div
+          initial={{ opacity: 0, x: -80 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+        >
+          {/* Small Intro */}
+         <motion.p
+        className="text-white/80 text-lg mb-3 tracking-widest uppercase 
+        bg-white/10 backdrop-blur-md inline-block px-4 py-2 rounded-lg shadow-md"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
+      >
+        Welcome to My Portfolio
+      </motion.p>
+          {/* Main Heading */}
+         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-5 text-white">
+          Hi, I'm{" "}
+          <span className="text-gray-300">
+            MD Shakwath
+          </span>
+        </h1>
+          {/* Dynamic Typing */}
+          <div className="text-2xl sm:text-3xl font-semibold mb-6 text-gray-300">
+            <TypeAnimation
+              sequence={[
+                "Frontend Developer",
+                2000,
+            
+                "Creative Coder ",
+                2000,
+              ]}
+              speed={50}
+              repeat={Infinity}
+            />
+          </div>
+
+          {/* Description */}
+          <p className="text-gray-400 text-lg max-w-xl mb-8 leading-relaxed">
+            I create modern, fast, and user-friendly websites using React,
+            Tailwind CSS, Firebase, and the latest technologies. Passionate
+            about design + development.
+          </p>
+
+          {/* Buttons */}
+          
+          <div className="flex flex-wrap gap-4 mb-8">
+          <motion.a
+            href="#projects"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-7 py-3 rounded-xl 
+            bg-white/10 backdrop-blur-md border border-white/20 
+            text-white font-semibold shadow-lg 
+            hover:border-white transition"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">
-              Hi, I'm{" "}
-              <motion.span
-                className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-                dark:from-blue-400 dark:via-purple-500 dark:to-pink-500 
-                bg-clip-text text-transparent inline-block"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-                style={{
-                  backgroundSize: "200% 200%",
-                }}
-              >
-                MD Shakwath
-              </motion.span>
-            </h1>
+            View Projects
+          </motion.a>
 
-            <motion.h2
-              className="text-2xl sm:text-3xl font-semibold mb-6 
-              text-transparent bg-clip-text bg-gradient-to-r 
-              from-cyan-500 to-blue-700 dark:from-cyan-400 dark:to-blue-600"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              Web Developer
-            </motion.h2>
-
-            <motion.p
-              className="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-            >
-              I build modern, interactive, and responsive web experiences using
-              React, Tailwind CSS, and cutting-edge technologies.
-            </motion.p>
-
-            <div className="flex flex-wrap gap-4">
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 font-medium text-white rounded-lg 
-                bg-gradient-to-r from-blue-600 to-purple-600 
-                hover:from-purple-600 hover:to-pink-500 
-                transition-all duration-300 shadow-lg 
-                hover:shadow-purple-500/40"
-              >
-                View My Work
-              </motion.a>
-
-              <motion.a
-                href="#contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 font-medium rounded-lg 
-                border border-blue-500 text-blue-600 dark:text-blue-400 
-                hover:text-white hover:bg-gradient-to-r 
-                from-blue-600 to-purple-600 transition-all duration-300"
-              >
-                Contact Me
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* RIGHT: Image Section */}
-          <motion.div
-            className="flex justify-center"
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2 }}
+          <motion.a
+            href="/resume.pdf"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            className="px-7 py-3 rounded-xl 
+            bg-white/10 backdrop-blur-md border border-white/20 
+            text-white font-semibold shadow-lg 
+            hover:border-white transition 
+            flex items-center gap-2"
           >
-            <motion.div
-              className="relative"
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            >
-              {/* Glowing Gradient Ring */}
-             <div
-  className="absolute -inset-4 
-  bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 
-  rounded-full blur-xl opacity-25 dark:opacity-35"
-></div>
+            <FaDownload />
+            Resume
+          </motion.a>
+</div>
 
-{/* Profile Image */}
-<img
-  src="https://i.ibb.co/PvVz31jd/afas.png"
-  alt="Profile"
-  className="relative rounded-full w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 lg:w-80 lg:h-80 
-  object-cover border-4 border-gray-200 dark:border-gray-700 shadow-lg shadow-blue-500/10"
- />
+          {/* Social Links */}
+          <div className="flex gap-5 text-2xl">
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-gray-400 transition"
+            >
+              <FaGithub />
+            </a>
+            <a
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-blue-600 transition"
+            >
+              <FaLinkedin />
+            </a>
+          </div>
+        </motion.div>
+
+        {/* RIGHT IMAGE */}
+        <motion.div
+          initial={{ opacity: 0, x: 80 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2 }}
+          className="flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, -20, 0] }}
+            transition={{ repeat: Infinity, duration: 4 }}
+            className="relative"
+          >
+            {/* Glow Ring */}
+            <div className="absolute -inset-5 rounded-full bg-blue-500/30 blur-3xl opacity-50 animate-pulse"></div>
+
+            {/* Profile */}
+            <img
+              src="https://i.ibb.co.com/gbmLzn75/profile.jpg"
+              alt="Profile"
+              className="relative w-72 h-72 sm:w-80 sm:h-80 rounded-full object-cover border-4 border-white/20 shadow-2xl"
+            />
+
+            
+           <div className="absolute bottom-5 -left-10 bg-white/20 backdrop-blur-md text-white px-4 py-2 rounded-xl border border-white/30 shadow-lg font-semibold flex items-center gap-2">
   
-            </motion.div>
+            {/* Active Dot */}
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            Available for Work
+          </div>
+            
           </motion.div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );
