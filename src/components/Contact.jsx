@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import {
   Mail,
   Phone,
@@ -11,199 +12,161 @@ import {
 } from "lucide-react";
 
 export default function Contact() {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("https://formspree.io/f/mkgplekj", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (res.ok) {
+        toast.success("Message sent successfully 🚀");
+        form.reset();
+      } else {
+        toast.error("Failed to send message ❌");
+      }
+    } catch (error) {
+      toast.error("Something went wrong ❌");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
-      className="py-20 text-white relative overflow-hidden bg-[#0a0a0f]"
+      className="relative py-24 bg-[#0a0a0f] text-white overflow-hidden"
     >
-      {/* Background Glow (updated to match dark neon theme) */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute w-[300px] h-[300px] bg-cyan-500/10 blur-[120px] rounded-full top-10 left-10" />
-        <div className="absolute w-[300px] h-[300px] bg-purple-500/10 blur-[120px] rounded-full bottom-10 right-10" />
+      {/* BACKGROUND */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute w-[320px] h-[320px] bg-cyan-500/10 blur-[140px] rounded-full top-10 left-10" />
+        <div className="absolute w-[320px] h-[320px] bg-purple-500/10 blur-[140px] rounded-full bottom-10 right-10" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-8 z-10">
+      <div className="max-w-7xl mx-auto px-6">
 
-        {/* Title */}
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold text-center mb-16
-          bg-gradient-to-r from-white via-white
-          bg-clip-text text-transparent"
+        {/* TITLE */}
+        <motion.div
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
         >
-          Get In Touch
-        </motion.h2>
+          <h2 className="text-4xl md:text-6xl font-black">
+            Get In{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">
+              Touch
+            </span>
+          </h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-14">
 
-          {/* LEFT SIDE */}
-          <motion.div
-            initial={{ x: -80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <h3 className="text-2xl font-semibold mb-6 text-blue-400">
+          {/* LEFT INFO */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold text-cyan-300">
               Contact Information
             </h3>
 
-            <p className="text-gray-300 mb-6">
-              Feel free to reach out I’ll get back to you as soon as possible!
+            <p className="text-gray-400">
+              Feel free to contact me anytime. I’ll reply as soon as possible.
             </p>
 
-            <div className="space-y-6">
-
-              {/* Email */}
-              <div className="flex items-center gap-4 p-4 rounded-lg
-              bg-white/5 backdrop-blur-xl
-              border border-white/10
-              hover:border-white transition">
-                <Mail className="text-blue-400 w-6 h-6" />
-                <div>
-                  <h4 className="font-medium text-white0">Email</h4>
-                  <p className="text-gray-300">
-                    shakawathhossain0@gmail.com
-                  </p>
-                </div>
-              </div>
-
-              {/* Phone */}
-              <div className="flex items-center gap-4 p-4 rounded-lg
-              bg-white/5 backdrop-blur-xl
-              border border-white/10
-              hover:border-white transition">
-                <Phone className="text-white w-6 h-6" />
-                <div>
-                  <h4 className="font-medium text-white">Phone</h4>
-                  <p className="text-gray-300">
-                    +8801609-503460
-                  </p>
-                </div>
-              </div>
-
-              {/* Location */}
-              <div className="flex items-center gap-4 p-4 rounded-lg
-              bg-white/5 backdrop-blur-xl
-              border border-white/10
-              hover:border-white transition">
-                <MapPin className="text-red-600 w-6 h-6" />
-                <div>
-                  <h4 className="font-medium text-white">Location</h4>
-                  <p className="text-gray-300">
-                    West Bakolia, Chittagong
-                  </p>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Socials */}
-            <div className="mt-8">
-              <h4 className="font-medium mb-4 text-white">
-                Follow Me
-              </h4>
-
-              <div className="flex space-x-4">
-
-                {[
-                  { link: "https://github.com/Shakwath", icon: <Github /> },
-                  { link: "https://x.com", icon: <Twitter /> },
-                  { link: "https://linkedin.com", icon: <Linkedin /> },
-                  { link: "https://instagram.com", icon: <Instagram /> },
-                ].map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    className="
-                    w-11 h-11 flex items-center justify-center
-                    border border-white/20
-                    rounded-full
-                    text-white
-                    bg-transparent
-                    hover:border-white
-                    hover:text-cyan-400
-                    transition
-                    "
-                  >
-                    {item.icon}
-                  </a>
-                ))}
-
-              </div>
-            </div>
-          </motion.div>
-
-          {/* RIGHT FORM */}
-          <motion.div
-            initial={{ x: 80, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3 className="text-2xl font-semibold mb-6 text-blue-400">
-              Send Me a Message
-            </h3>
-
-            <form
-              action="https://formspree.io/f/mkgplekj"
-              method="POST"
-              className="space-y-5"
-            >
-
-              {["Name", "Email"].map((label, index) => (
-                <input
-                  key={index}
-                  type={label === "Email" ? "email" : "text"}
-                  name={label.toLowerCase()}
-                  placeholder={label}
-                  required
-                  className="
-                  w-full px-4 py-3 rounded-lg
-                  border border-white/10
-                  bg-transparent
-                  text-white
-                  focus:border-white
-                  outline-none
-                  transition
-                  "
-                />
-              ))}
-
-              <textarea
-                name="message"
-                rows="5"
-                placeholder="Message"
-                required
-                className="
-                w-full px-4 py-3 rounded-lg
-                border border-white/10
-                bg-transparent
-                text-white
-                focus:border-white
-                outline-none
-                transition
-                "
-              />
-
-              <button
-                type="submit"
-                className="
-                w-full py-3 rounded-lg
-                border border-white
-                text-white
-                bg-transparent
-                hover:border-green-500
-                hover:text-green-300
-                transition
-                "
+            {/* INFO ITEMS */}
+            {[
+              { icon: <Mail />, text: "shakawathhossain0@gmail.com" },
+              { icon: <Phone />, text: "+8801609-503460" },
+              { icon: <MapPin />, text: "Chittagong, Bangladesh" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4"
               >
-                Send Message ✉️
-              </button>
+                <div className="w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10">
+                  {item.icon}
+                </div>
+                <p className="text-gray-300">{item.text}</p>
+              </div>
+            ))}
 
-            </form>
-          </motion.div>
+            {/* SOCIAL */}
+            <div className="flex gap-4 pt-4">
+              {[
+                { icon: <Github />, link: "https://github.com/Shakwath" },
+                { icon: <Linkedin />, link: "#" },
+                { icon: <Twitter />, link: "#" },
+                { icon: <Instagram />, link: "#" },
+              ].map((s, i) => (
+                <a
+                  key={i}
+                  href={s.link}
+                  target="_blank"
+                  className="w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* FORM */}
+          <motion.form
+            onSubmit={handleSubmit}
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="space-y-5"
+          >
+
+            <input
+              name="name"
+              placeholder="Your Name"
+              className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 outline-none"
+              required
+            />
+
+            <input
+              name="email"
+              type="email"
+              placeholder="Your Email"
+              className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 outline-none"
+              required
+            />
+
+            <textarea
+              name="message"
+              rows="5"
+              placeholder="Your Message"
+              className="w-full px-5 py-3 rounded-2xl bg-white/5 border border-white/10 outline-none"
+              required
+            />
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full py-3 rounded-2xl border border-white/10 transition
+                ${
+                  loading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-cyan-500/20"
+                }`}
+            >
+              {loading ? "Sending..." : "Send Message ✉️"}
+            </button>
+
+          </motion.form>
 
         </div>
       </div>
